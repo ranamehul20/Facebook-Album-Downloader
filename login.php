@@ -1,8 +1,8 @@
 <?php
 require_once 'fbconfig.php';
 $helper = $fb->getRedirectLoginHelper();
-$permissions = ['email'];
-$loginUrl = $helper->getLoginUrl('https://ranamehulj.000webhostapp.com/fb-callback.php',$permissions);
+$permissions = ['email','user_photos'];
+$loginUrl = $helper->getLoginUrl('https://mehulranartchallenge.herokuapp.com/fb-callback.php',$permissions);
 
 ?>
 <html>
@@ -69,6 +69,10 @@ echo '<a href="' . htmlspecialchars($loginUrl) . '" class="btn btn-primary"><i c
         ?>
 
 			</div>
+		</div>
+		<div>
+		    <h4 style="color:blue">Develop By Mehul Rana</h4>
+		    <h5 style="color:blue">Email Id: ranamehulj@gmail.com</h5>
 		</div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 .box label.btn-default.active{background-color:#007ba7;color:#FFF}
-.box label.btn-default{width:100%;border:1px solid #efefef;margin:5px; box-shadow:5px 8px 8px 0 #ccc;}
+.box label.btn-default{width:100%; border:1px solid #efefef; margin:5px; box-shadow:5px 8px 8px 0 #ccc;}
 .box label .bizcontent{width:100%;}
-.box .btn-group{width:90%}
+.box .btn-group{width:100%}
 .box .btn span.glyphicon{
     opacity: 0;
 }

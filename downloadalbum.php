@@ -1,11 +1,12 @@
 <?php 
+ini_set(‘max_execution_time’, ‘1000’);
  require_once 'fbconfig.php';
  $access_token=$_SESSION['fb_access_token'];
 if(isset($_GET['id']))
 {
 $id=$_GET['id'];
 $name=$_GET['name'];
-$album_download_directory = 'Downloads/albums/'.uniqid().'/';
+$album_download_directory ='Downloads/albums/'.uniqid().'/';
 mkdir($album_download_directory, 0777,true);
  $url="https://graph.facebook.com/v3.1/".$id."/photos?fields=source,images,name&access_token=".$access_token;
     $pic=file_get_contents($url);
@@ -66,26 +67,27 @@ $zip->close();
     {
         unlink($file);
     }
-    unlink($album_download_directory);
+    rmdir($album_directory);
+    rmdir($album_download_directory);
+    
 }
-if ( isset( $_GET['select_album'] ) and count( $_GET['select_album'] ) > 0) {
-		$selected_albums = explode("/", $_GET['select_album']);
-		foreach ( $selected_albums as $selected_album ) {
-			$selected_album = explode( ",", $selected_album );
-			download_album($selected_album[0], $selected_album[1] );
-		}
-	}
-function download_album($albumid,$albumname){
-$id=$albumid;
-$name=$albumname;
-$album_download_directory = 'Downloads/albums/'.uniqid().'/';
-mkdir($album_download_directory, 0777,true);
- $url="https://graph.facebook.com/v3.1/".$id."/photos?fields=source,images,name&access_token=".$access_token;
-    $pic=file_get_contents($url);
-    $pictures=json_decode($pic);
-    $page=(array)$pictures->paging;
-    $album_directory = $album_download_directory.$name;
-		if ( !file_exists( $album_directory ) ) {
+if ( isset( $_GET['select_album'] ) and count( $_GET['select_album'] ) > 0) 
+{
+	$selected_albums = explode("/", $_GET['select_album']);
+	foreach ( $selected_albums as $selected_album ) 
+	{
+		$selected_album = explode( ",", $selected_album );
+		$id=$selected_album[0];
+		$name=$selected_album[1];
+		$album_download_directory ='Downloads/albums/'.uniqid().'/';
+        mkdir($album_download_directory, 0777,true);
+        $url="https://graph.facebook.com/v3.1/".$id."/photos?fields=source,images,name&access_token=".$access_token;
+        $pic=file_get_contents($url);
+        $pictures=json_decode($pic);
+        $page=(array)$pictures->paging;
+        $album_directory = $album_download_directory.$name;
+		if ( !file_exists( $album_directory ) ) 
+		{
 			mkdir($album_directory, 0777,true);
 		}
 		$i=1;
@@ -108,7 +110,9 @@ mkdir($album_download_directory, 0777,true);
         }
         
     }while($url!='none');
-$rootPath = realpath($album_download_directory);
+
+	}
+	$rootPath = realpath($album_download_directory);
 $filesToDelete = array();
 $zip = new ZipArchive();
 $zip->open('album.zip', ZipArchive::CREATE | ZipArchive::OVERWRITE);
@@ -139,6 +143,8 @@ $zip->close();
     {
         unlink($file);
     }
-
+    rmdir($album_directory);
+    rmdir($album_download_directory);
 }
+
 ?>
