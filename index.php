@@ -206,24 +206,6 @@ else
                         </a>
                     </div>
                   </li>
-                  <li >
-                    <div class="col-sm-12">
-                        <a href="#" id="move_all" class="center">
-                            <span class="btn btn-success col-sm-12 col-xs-12">
-                                Move All
-                            </span>
-                        </a>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="col-sm-12">
-                        <a href="#" id="move-selected-albums" class="center">
-                            <span class="btn btn-info col-sm-12 col-xs-12">
-                                Move Selected
-                            </span>
-                        </a>
-                    </div>
-                </li>
               </ol>
 	<div id="result" style="color:red;background-color: yellow">
 	</div>
